@@ -9,10 +9,11 @@ class App extends Component {
     super(props);
     this.state = {
       input: "",
-      todo: []
+      todo: [],
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onButtonClick = this.onButtonClick.bind(this);
   }
 
   onChange(e){
@@ -23,8 +24,20 @@ class App extends Component {
 
   onSubmit(e){
     e.preventDefault();
-    this.setState({
-      todo: [...this.state.todo,this.state.input]
+    this.setState((prevState) => ({
+      todo: [...prevState.todo,{
+        item: this.state.input,
+        completed: false
+      }]
+    }))
+  }
+
+  onButtonClick(){
+    this.setState((prevState) => {
+      todo: [...prevState.todo,{
+        item: this.state.input,
+        completed: true
+      }]
     })
   }
 
@@ -35,7 +48,7 @@ class App extends Component {
         <input value={this.state.input} onChange={this.onChange}/>
         <button>Add</button>
       </form>
-      <List todo={this.state.todo} />
+      <List todo={this.state.todo} handler={this.onButtonClick}/>
     </div>
     )
   }
