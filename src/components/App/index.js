@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+
+import AppBar from 'material-ui/AppBar'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 
 import List from '../List'
+
 
 class App extends Component {
   constructor(props){
@@ -45,11 +49,13 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <div>
+      <AppBar title="To Do List"/>
       <form onSubmit={this.onSubmit}>
-        <input value={this.state.input} onChange={this.onChange}/>
-        <button>Add</button>
+        <TextField value={this.state.input} onChange={this.onChange}/>
+        <RaisedButton type="submit" secondary={true}>Add</RaisedButton>
       </form>
       <List onComplete={this.onComplete} todo={this.state.todo} />
     </div>
